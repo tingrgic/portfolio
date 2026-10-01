@@ -1,0 +1,16 @@
+[Unit]
+Description=Tin Grgic portfolio preview
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/tin/Documents/ChatGPT/Portfolio
+ExecStart=/home/tin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node /home/tin/Documents/ChatGPT/Portfolio/node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4178 --strictPort
+Restart=on-failure
+RestartSec=3
+SuccessExitStatus=143
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target

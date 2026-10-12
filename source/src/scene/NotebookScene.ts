@@ -863,7 +863,7 @@ export class NotebookScene {
     const direction = side === 'right' ? 'forward' : 'backward';
     const pending = Promise.all(
       Array.from({length: 12}, (_, i) =>
-        this.loadTexture(`/images/hands-clay-full/${direction}-${i + 1}.webp`)
+        this.loadTexture(asset(`images/hands-clay-full/${direction}-${i + 1}.webp`))
           .then(texture => { this.handTextures[side][i] = texture; }),
       ),
     ).then(() => {});

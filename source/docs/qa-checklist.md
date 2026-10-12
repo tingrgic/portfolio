@@ -2,7 +2,7 @@
 
 ## Full overlap repair and portfolio audit — 2026-10-12
 
-The current authoritative result is documented in [full-qa-2026-10-12.md](full-qa-2026-10-12.md). Production and GitHub Pages builds pass; the settled Chromium/software-WebGL suite passes **47/47** with one worker, and the built-site smoke matrix passes **12/12**. The supplied closed-cover overlap is fixed and the later text tabs were replaced by precisely projected person, briefcase and envelope icons. Reveal/alignment coverage includes 390×844, 430×932 and an artificial 180px viewport-clamp stress test. Real iPhone Safari remains an explicit device-level gate.
+The current authoritative result is documented in [full-qa-2026-10-12.md](full-qa-2026-10-12.md). Production and GitHub Pages builds pass; the settled Chromium/software-WebGL suite passes **47/47** with one worker, and the built-site smoke matrix passes **12/12**. A later deployed-desktop failure was traced to hand frames escaping the GitHub repository base: the resulting 404s forced the static fallback, removing hands and animation. All hand URLs now use the shared deployment-base helper. The exact `/portfolio/` build passes normal-motion production checks at 390×664 and 1366×768 with WebGL active, exactly 12 opening hand frames and zero HTTP/runtime errors; the focused cover/loading/motion regression set passes **15/15**. The supplied closed-cover overlap is fixed and the later text tabs were replaced by precisely projected person, briefcase and envelope icons. Reveal/alignment coverage includes 390×844, 430×932 and an artificial 180px viewport-clamp stress test. Real iPhone Safari remains an explicit device-level gate.
 
 ## Animation-content repair — 2026-10-01
 

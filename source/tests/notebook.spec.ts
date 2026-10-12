@@ -43,6 +43,10 @@ for (const [width, height] of sizes) {
         "page",
       );
       if (section === "intro") {
+        if (width >= 700) {
+          await expect(page.locator(".intro-spread .project-print")).toHaveCount(0);
+          await expect(page.getByText("A little about me.", { exact: true })).toBeVisible();
+        }
         const contactFits = await page.locator(".intro-work-link").evaluate((el) => {
           const page = el.closest(".paper-page")!.getBoundingClientRect();
           const contact = el.getBoundingClientRect();
@@ -51,10 +55,14 @@ for (const [width, height] of sizes) {
         expect(contactFits).toBe(true);
       }
       if (section === "work") {
+        if (width >= 700) {
+          await expect(page.locator(".work-spread .title-page")).toHaveCount(0);
+          await expect(page.locator(".work-spread .desktop-project-page")).toHaveCount(2);
+        }
         await expect(
           (width < 700 ? page.getByRole("heading", { name: "Komon", exact: true }) : page.getByRole("link", { name: "Visit Komon (opens in a new tab)", exact: true })),
         ).toBeVisible();
-        await expect(page.locator('a[href="https://komon.hr"]')).toHaveCount(width < 700 ? 2 : 1);
+        await expect(page.locator('a[href="https://komon.hr"]')).toHaveCount(2);
         if (width < 700) {
           await expect(page.locator(".book-content")).toHaveCSS(
             "overflow-y",
@@ -94,9 +102,12 @@ for (const [width, height] of sizes) {
         ).toBeVisible();
         await expect(
           page.locator('a[href="https://tingrgic.github.io/pk-normal"]'),
-        ).toHaveCount(width < 700 ? 2 : 1);
+        ).toHaveCount(2);
       }
-      if (section === "connect") await expect(page.locator('a[href="mailto:info@tingrgic.com"]')).toHaveCount(1);
+      if (section === "connect") {
+        await expect(page.locator('a[href="mailto:info@tingrgic.com"]')).toHaveCount(1);
+        await expect(page.locator('.clay-link-label')).toHaveCount(2);
+      }
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -232,6 +243,16 @@ test("200 percent desktop zoom equivalent reflows", async ({ page }) => {
   for (const section of ["intro", "work", "connect"]) {
     await page.goto("/#" + section);
     await page.locator('.notebook[data-phase="reading"]').waitFor();
+    for (const leaf of await page.locator('.paper-page').all()) {
+      const size = await leaf.evaluate(el => ({client: el.clientHeight, scroll: el.scrollHeight}));
+      expect(size.scroll).toBeLessThanOrEqual(size.client + 1);
+    }
+    if (section === "intro") {
+      await page.getByRole("button", { name: "02 Work", exact: true }).click();
+      await expect(page.locator(".notebook")).toHaveAttribute("aria-busy", "false");
+      await page.getByRole("button", { name: "01 Hello", exact: true }).click();
+      await expect(page.locator(".notebook")).toHaveAttribute("aria-busy", "false");
+    }
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,

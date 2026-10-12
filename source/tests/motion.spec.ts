@@ -188,7 +188,7 @@ test("WebGL failure leaves a usable static notebook", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Visit Komon (opens in a new tab)", exact: true }),
   ).toBeVisible();
-  await expect(page.locator('a[href="https://komon.hr"]')).toHaveCount(1);
+  await expect(page.locator('a[href="https://komon.hr"]')).toHaveCount(2);
 });
 test("asset failure after WebGL starts restores fallback tabs", async ({ page }) => {
   await page.route("**/models/portfolio-environment.glb", (route) =>

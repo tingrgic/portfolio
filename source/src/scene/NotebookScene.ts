@@ -703,7 +703,11 @@ export class NotebookScene {
         x: ((centre.x + 1) * this.width) / 2,
         y: ((1 - centre.y) * this.canvasHeight) / 2 - this.offsetY,
       };
-      const size = this.mobile ? 48 : 60;
+      // At extreme desktop zoom the projected physical bookmarks are only
+      // ~29 CSS px apart. Keep their pointer regions disjoint so the later
+      // DOM sibling cannot steal a click from the bookmark above it. These
+      // 28 CSS px targets render as 56 device px at the 200% zoom equivalent.
+      const size = this.mobile ? 48 : window.innerHeight < 520 ? 28 : 60;
       // Keep the generous touch target inside the viewport, but position its
       // visible icon at the projected mesh centre. Coupling the artwork to the
       // clamped hit-box made narrow browser viewports pull labels off the tab.
@@ -711,6 +715,7 @@ export class NotebookScene {
       const top = point.y - size / 2;
       button.style.left = `${left}px`;
       button.style.top = `${top}px`;
+      button.style.width = `${size}px`;
       button.style.height = `${size}px`;
       button.style.setProperty('--tab-anchor-x', `${point.x - left}px`);
       button.style.setProperty('--tab-anchor-y', `${point.y - top}px`);
@@ -1159,7 +1164,10 @@ export class NotebookScene {
     this.options.host.dataset.phase = "turning";
     this.options.host.dataset.direction = backward ? "backward" : "forward";
     await this.animate(1.95, (time) => {
-      const t = time;
+      // The paper deformation and authored hand pose intentionally advance on
+      // one shared stop-motion clock. Quantizing both here prevents the hand
+      // from visually sliding between independently sampled paper frames.
+      const t = Math.min(1.95, Math.floor(time * 10 + 1e-6) / 10);
       this.options.host.dataset.turnTime = String(t);
       const p = gsap.parseEase("power1.inOut")(
         THREE.MathUtils.clamp((t - 0.36) / 1.12, 0, 1),

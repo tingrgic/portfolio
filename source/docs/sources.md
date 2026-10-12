@@ -12,7 +12,7 @@ Inspected 2026-09-29. Seven subsequently supplied visual references inform the r
 - Name and role at Rimac Technology supplied directly by user.
 - Visual references: two open black notebook stock-image search screenshots; three mixed-media cutout/marker examples; two Tom print-texture screenshots. Used for material and composition direction only; no watermarked stock image or cartoon character is incorporated into the site.
 - Cormorant Garamond and DM Sans: Google Fonts distributions, SIL Open Font License, bundled locally with licenses.
-- Hand: original atlases are historical. The current revision uses six separately authored right poses and six left poses in `public/images/hands-pov/`, with no reflection. These are generated editorial assets, not photographs of Tin. See `image-generation.md`.
+- Hand: original atlases are historical. The current revision uses twelve separately authored right poses and twelve left poses in `public/images/hands-clay-full/`, with no reflection. These are generated editorial assets, not photographs of Tin. See `image-generation.md`.
 - Notebook: the main notebook is now original code-authored Three.js geometry. The earlier generated blank notebook cutout (84KB WebP) is retained only for hardware/context failure. Reference notebook screenshots informed the material direction, but are not used as site assets.
 - Paper: original generated cream fiber texture; selectively composited over project prints and turning leaves.
 - Caveat: Google Fonts, SIL Open Font License, local Latin/Latin Extended WOFF2 subsets. License in public/fonts/Caveat-LICENSE.txt.
@@ -24,7 +24,7 @@ Screenshots are faithful captures of the user-supplied portfolio sites. They are
 - https://www.awwwards.com/sites/bruno-simon-portfolio — primary award record, SOTD November 11, 2019, score 8.04. Studied consistent object-based navigation and commitment to a coherent world; no car/game elements copied.
 - https://henryheffernan.com/ — directly browsed the physical desk and staged entry. Used to reason about arrival into a space. Our camera remains first person and does not orbit the room.
 - https://adamsnotebook.com/projects/a-singular-reading-experience/ — creator's explanation of real HTML on a physical book, especially page/text synchronization. Closest notebook reference, not claimed as award-winning.
-- New generated assets: quiet walnut desktop plus separate six-pose right and left hand atlases, generated with the built-in image tool. Each arm includes its photographed knit sleeve. Left-hand poses are independently generated; no CSS mirroring remains. Source atlases remain under the Codex generated-images folder; optimized application assets live in `public/images/hands-pov/` and `public/images/walnut-desk.webp`.
+- New generated assets: quiet walnut desktop plus the historical six-pose right and left hand atlases, generated with the built-in image tool. They were superseded by twelve-pose-per-direction clay atlases in `public/images/hands-clay-full/`. Left-hand poses are independently generated; no CSS mirroring is used.
 - The earlier note saying mobile shows the complete notebook is historical and superseded: current phone framing shows the readable right page with the left leaf naturally continuing off the viewport.
 
 ## Real 3D implementation references
@@ -45,7 +45,7 @@ Screenshots are faithful captures of the user-supplied portfolio sites. They are
 
 Four new user-supplied JPEG references supersede the earlier lined-journal visual direction: `1-Photo-1.jpg` is the closed seated composition; `2-Photo-2.jpg` the open introduction/work spread; `3-Photo-3.jpg` the connect spread; `4-Photo-4.jpg` the asset lookbook. They establish warm wood, unruled cream paper, charcoal leather, dimensional clay titles/icons, handwritten copy, right-edge tabs and photographic hands. Reference originals and checksums are preserved for development in `artifacts/visual-redesign/audit-2026-10-06/references/`; they have not been copied into production assets. Their depicted website imagery is stylized and does not replace authentic local Komon/PK Normal screenshots.
 
-The user explicitly supplied `info@tingrgic.com` for the redesign; existing config still has an empty email during this audit-only pass. The configured LinkedIn address remains `https://linkedin.com/in/tingrgic`. No new biography, authorship claim or project outcome was inferred.
+The user explicitly supplied `info@tingrgic.com` for the redesign and it is configured alongside `https://linkedin.com/in/tingrgic`. No new biography, authorship claim or project outcome was inferred.
 
 See `visual-redesign-audit.md` for the verified pre-change backup, current architecture/asset inventory, actual baseline evidence and proposed implementation sequence. No new GLB, clay artwork or hand sequence has been produced or represented as complete.
 
@@ -57,7 +57,7 @@ The wood material `walnut-clay-desk.webp`, leather material `notebook-leather.we
 
 `public/models/portfolio-environment.glb` is authored through Blender 4.3.2 with the reproducible `scripts/author-environment.py`; the editable `.blend` source is in `artifacts/visual-redesign/authoring/`. The portable Blender runtime was downloaded from the official Blender release server into `/tmp`; it is an offline authoring dependency, not a browser runtime or system installation. The environment includes separately named desk, coffee, plant, lamp, pencil cup/pencils, dish/clips and foreground clothing. Repeated static detail is consolidated by role/material. The interactive notebook, cover, paper stock, turning sheet and tabs retain independently controlled Three.js geometry.
 
-The hand atlas remains the previously documented generated photographic sequence (six independent poses per direction). Camera/hand/page interpolation is smoother, but this revision does not claim newly authored 18–24 fps finger articulation or identity-accurate hands.
+The hand atlas now uses twelve independently authored clay poses per direction. Hand selection and the 48-segment paper deformation advance on the same deliberate 10 fps stop-motion clock; the assets do not claim identity-accurate hands.
 
 
 ## Reference-led refinement, October 2026

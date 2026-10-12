@@ -4,7 +4,7 @@ The CSS cover and photographed spread occupy incompatible surfaces and intersect
 
 Three.js owns the desk, rounded black covers, hinge, page blocks, paper surfaces, moving sheet, shadows and hand placements. The left cover and its paper block rotate as one assembly about a raised spine; their closed positions sit above the right block. A deforming sheet mesh turns across the binding. The same camera projects all geometry.
 
-At rest, native HTML uses a readable affine plane over the paper for selectable text, keyboard access, links and scrolling. During movement, snapshots of that same HTML become textures on the actual page meshes; the interactive layer is hidden and inert until the mesh lands. Both source and destination textures are ready before movement. This avoids the depth-order limitations of independent CSS text/cover layers.
+At rest, native HTML uses a readable affine plane over the fixed paper leaves for selectable text, keyboard access and links. Notebook pages do not scroll; each concise composition fits its leaf. During movement, snapshots of that same HTML become textures on the actual page meshes; the interactive layer is hidden and inert until the mesh lands. Both source and destination textures are ready before movement. This avoids the depth-order limitations of independent CSS text/cover layers.
 
 Opening can be skipped. Reduced motion enters the same 3D reading view without animation. WebGL failure falls back to the accessible static notebook. Render only when geometry/camera changes; cap pixel density and shadow resolution on phones. Keep every asset local and preserve the existing private hosting setup.
 
@@ -24,4 +24,4 @@ Stationary ink is opaque and writes depth; the flat turning sheet sits above the
 
 ## October 7 clay redesign
 
-The current cover and left stock now use independent pivots with a delayed stock response; the earlier coupled-assembly description is historical. The scene loads an original Blender GLB environment through `EnvironmentAssets.ts`, adds independent physical tab meshes, retains its 48-segment turning sheet and native HTML projection, and uses a single labeled opening timeline. See `clay-redesign-implementation.md` for implementation, tests and limitations. The original six-pose hand sources remain; continuous motion sampling supersedes the old 10 fps quantized transform clock.
+The current cover and left stock now use independent pivots with a delayed stock response; the earlier coupled-assembly description is historical. The scene loads an original Blender GLB environment through `EnvironmentAssets.ts`, adds independent physical tab meshes, retains its 48-segment turning sheet and native HTML projection, and uses a single labeled opening timeline. See `clay-redesign-implementation.md` for implementation, tests and limitations. Twelve independently authored poses per direction and the page deformation share a 10 fps stop-motion clock.

@@ -17,6 +17,7 @@ try {
   await page.goto(target);
   await page.locator('.notebook[data-phase="reading"]').waitFor({timeout:30000});
   if(await page.locator('.desk').getAttribute('data-renderer')!=='webgl')throw Error('Production did not initialize WebGL');
+  if(width>=700&&await page.locator('.intro-spread .project-print').count()!==0)throw Error('Desktop Intro still repeats Work content');
   if(handRequests.length!==12)throw Error(`Opening loaded ${handRequests.length} hand frames instead of 12`);
   if(handRequests.some(url=>!new URL(url).pathname.startsWith(`${deploymentPath}images/hands-clay-full/`)))throw Error(`Hand frame escaped deployment base ${deploymentPath}`);
   await page.screenshot({path:`artifacts/qa/production-3d-${kind}-${width}-intro.png`});
@@ -25,7 +26,13 @@ try {
   if(await page.locator('a[href="https://komon.hr"]').count()<1)throw Error('Komon links missing');
   if(width===390){await page.getByRole('button',{name:'Next section'}).click();await page.locator('.notebook[data-phase="reading"][aria-busy="false"]').waitFor({timeout:30000});}
   if(await page.locator('a[href="https://tingrgic.github.io/pk-normal"]').count()<1)throw Error('PK Normal links missing');
+  if(width>=700&&await page.locator('.work-spread .desktop-project-page').count()!==2)throw Error('Desktop Work is not split into two project leaves');
   await page.screenshot({path:`artifacts/qa/production-3d-${kind}-${width}-work.png`});
+  await page.getByRole('button',{name:'03 Connect'}).click();
+  await page.locator('.notebook[data-phase="reading"][aria-busy="false"]').waitFor({timeout:30000});
+  if(await page.locator('.clay-link-label').count()!==2)throw Error('Clay contact labels missing');
+  if(await page.locator('a[href="mailto:info@tingrgic.com"]').count()!==1)throw Error('Email link missing');
+  await page.screenshot({path:`artifacts/qa/production-3d-${kind}-${width}-connect.png`});
   results.push({width,height,renderer:await page.locator('.desk').getAttribute('data-renderer'),bounds:await page.locator('.notebook').getAttribute('data-book-bounds')});
   await page.close();
  }
